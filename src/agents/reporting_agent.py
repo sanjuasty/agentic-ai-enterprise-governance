@@ -1,16 +1,41 @@
 class ReportingAgent:
-    def generate(self, execution, risk, governance):
-        return {
-            "executive_summary": f"""
-EXECUTIVE SUMMARY:
-- Execution: {execution['status_summary']}
-- Risk Level: {risk['risk_level']}
-- Governance: {governance['governance_status']}
+    def generate(
+        self,
+        execution_result,
+        risk_result,
+        governance_result
+    ):
 
-KEY RISKS:
-{risk['risks']}
+        summary = f"""
+====================================
+EXECUTIVE PMO STATUS REPORT
+====================================
+
+PROGRAM STATUS:
+{execution_result['delivery_status']}
+
+EXECUTION SUMMARY:
+{execution_result['status_summary']}
+
+KEY UPDATE:
+{execution_result['key_update']}
+
+RISK LEVEL:
+{risk_result['risk_level']}
+
+IDENTIFIED RISKS:
+{risk_result['risks']}
+
+GOVERNANCE STATUS:
+{governance_result['governance_status']}
+
+EXECUTIVE ESCALATION:
+{governance_result['executive_escalation']}
 
 RECOMMENDATION:
-Continue monitoring with weekly governance review.
+Continue weekly governance review.
+
+====================================
 """
-        }
+
+        return summary
